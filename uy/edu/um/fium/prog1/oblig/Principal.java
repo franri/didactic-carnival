@@ -43,23 +43,23 @@ public class Principal{
 			}
 			lala=true;
 		*/ //porque no funca esto? la idea era que fuera para imprimir que queres hacer para saber que termino de hacer la actividad anterior
-			int temp=	keyboard.nextInt();
+			String entrada=	keyboard.nextLine();
 
-			switch(temp){
-				case 1:
+			switch(entrada){
+				case "1":
 					comenzarAgrego();
 				break;
-				case 2:
+				case "2":
 					System.out.println("Ingrese cédula");
 					String tempCi= keyboard.next();
 					buscarOperativo(tempCi);
 				break;
-				case 3:
+				case "3":
 					/*System.out.println("Ingrese fecha (dd/mm/aaaa)  //en año, ingrese cualquiera//");
 					String tempFechaSinParseo= keyboard.nextLine();*/
 					listarFC(/*tempFechaSinParseo*/);
 				break;
-				case 4:
+				case "4":
 					obtenerPresupuesto(diaActual);
 				break;
 				default:
@@ -74,26 +74,35 @@ public class Principal{
 		System.out.println("Para agregar un médico, ingrese 1.\nPara agregar un enfermero, ingrese 2.\nDe lo contrario, ingrese 0.");
 
 		Scanner keyboard= new Scanner(System.in);
-		int seleccionarModo= keyboard.nextInt();
+		boolean sePudoHacerLaCosa=false;
+		do{
+			String seleccionarModo= keyboard.nextLine();
 
-		switch(seleccionarModo){
-			case 0:
-				agregarEmpleado(0);
-				System.out.println("¿Qué quiere hacer ahora?");
-			break;
-			case 1:
-				agregarEmpleado(1);
-				System.out.println("¿Qué quiere hacer ahora?");
-			break;
-			case 2:
-				agregarEmpleado(2);
-				System.out.println("¿Qué quiere hacer ahora?");
-			break;
+			switch(seleccionarModo){
+				case "0":
+					agregarEmpleado(0);
+					sePudoHacerLaCosa=true;
+					System.out.println("¿Qué quiere hacer ahora?");
+				break;
+				case "1":
+					agregarEmpleado(1);
+					sePudoHacerLaCosa=true;
+					System.out.println("¿Qué quiere hacer ahora?");
+				break;
+				case "2":
+					agregarEmpleado(2);
+					sePudoHacerLaCosa=true;
+					System.out.println("¿Qué quiere hacer ahora?");
+				break;
+				default:
+					System.out.println("Su opción no es válida. Por favor reintente.");
+					sePudoHacerLaCosa=false;
+				break;
+			}
+			}while(!sePudoHacerLaCosa);
 		}
 
 		//keyboard.close();
-
-	}
 
 	public static void agregarEmpleado(int modo){
 
