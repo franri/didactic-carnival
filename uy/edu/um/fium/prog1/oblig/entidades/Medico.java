@@ -8,17 +8,14 @@ public class Medico extends Operativo{
 
   private String especialidad;
   private LocalDate fechaGraduado;
-	private LocalDate fechaGraduadoSinParseo;
 
-	public Medico(String nombre, String ci, String fechaNacimientoSinParseo, String celular, String direccion,String email,String fechaEntradaSinParseo,String sueldoBase,String especialidad,String fechaGraduadoSinParseo){
+	public Medico(String nombre, String ci, LocalDate fechaNacimiento, String celular, String direccion,String email,LocalDate fechaEntrada,String sueldoBase,String especialidad,LocalDate fechaGraduado){
 
-		super(nombre, ci, fechaNacimientoSinParseo, celular, direccion, email, fechaEntradaSinParseo, sueldoBase);
+		super(nombre, ci, fechaNacimiento, celular, direccion, email, fechaEntrada, sueldoBase);
 
 		this.especialidad=especialidad;
 
-		DateTimeFormatter formatoUruguayo= DateTimeFormatter.ofPattern("dd/MM/yyyy");
-
-		fechaGraduado=LocalDate.parse(fechaGraduadoSinParseo,formatoUruguayo);
+		this.fechaGraduado=fechaGraduado;
 	}
 
 

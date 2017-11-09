@@ -5,6 +5,7 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
+import java.time.format.DateTimeParseException;
 
 import uy.edu.um.fium.prog1.oblig.entidades.*;
 
@@ -30,7 +31,7 @@ public class Principal{
 
 		Scanner keyboard= new Scanner(System.in);
 
-	  System.out.println("BASE DE DATOS DE EMPLEADOS CASMU\n\nFecha:"+diaActualSinParseo+"\nActividades que puede realizar:\n\n1.\tRegistar nuevo empleado.\n2.\tBuscar operativo por cédula.\n3.\tEnviar saludo a operativos que cumplan años el día deseado.\n4.\tObtener presupuesto de área deseada.");
+	  System.out.println("BASE DE DATOS DE EMPLEADOS CASMU\n\nFecha:"+diaActualSinParseo+"\n\nActividades que puede realizar:\n\n1.\tRegistrar nuevo empleado.\n2.\tBuscar operativo por cédula.\n3.\tEnviar saludo a operativos que cumplan años el día deseado.\n4.\tObtener presupuesto del hospital.");
 
 
 		while(true){
@@ -62,7 +63,7 @@ public class Principal{
 					obtenerPresupuesto(diaActual);
 				break;
 				default:
-					System.out.println("Su opción es válida. Por favor reintente.");
+					System.out.println("Su opción no es válida. Por favor reintente.");
 				break;
 			}
 		}
@@ -103,7 +104,7 @@ public class Principal{
 		System.out.println("Ingrese cédula sin guión:");
 		String ci=keyboard.nextLine();
 		System.out.println("Ingrese fecha de nacimiento (dd/mm/aaaa):");
-		String fechaNacimientoSinParseo=keyboard.nextLine();
+		LocalDate fechaNacimiento=pedirFecha();
 		System.out.println("Ingrese celular:");
 		String celular=keyboard.nextLine();
 		System.out.println("Ingrese direccion:");
@@ -111,15 +112,15 @@ public class Principal{
 		System.out.println("Ingrese email:");
 		String email=keyboard.nextLine();
 		System.out.println("Ingrese fecha de entrada (dd/mm/aaaa):");
-		String fechaEntradaSinParseo=keyboard.nextLine();
+		LocalDate fechaEntrada=pedirFecha();
 		System.out.println("Ingrese sueldo base:");
 		String sueldoBase=keyboard.nextLine();
-		System.out.println("");//porque si no pongo esta impresion se me queda en enter infinito
+		//System.out.println("");//porque si no pongo esta impresion se me queda en enter infinito
 		//keyboard.close();
 
 		switch(modo){
 			case 0:
-				Empleado oOpTemp= new Operativo(nombre, ci, fechaNacimientoSinParseo, celular, direccion, email, fechaEntradaSinParseo, sueldoBase);
+				Empleado oOpTemp= new Operativo(nombre, ci, fechaNacimiento, celular, direccion, email, fechaEntrada, sueldoBase);
 
 				listaEmpleados.add(oOpTemp);
 				//listaOperativos.add(oOpTemp);
@@ -139,10 +140,10 @@ public class Principal{
 				}
 			}while(!aux);
 				System.out.println("Ingrese fecha de graduado:");
-				String fechaGraduadoSinParseo=keyboard.nextLine();
-				System.out.println("");
+				LocalDate fechaGraduado=pedirFecha();
 
-				Empleado oMedTemp= new Medico(nombre, ci, fechaNacimientoSinParseo, celular, direccion, email, fechaEntradaSinParseo, sueldoBase, especialidad, fechaGraduadoSinParseo);
+
+				Empleado oMedTemp= new Medico(nombre, ci, fechaNacimiento, celular, direccion, email, fechaEntrada, sueldoBase, especialidad, fechaGraduado);
 
 				listaEmpleados.add(oMedTemp);
 				//listaMedicos.add(oMedTemp);
@@ -158,9 +159,8 @@ public class Principal{
 				System.out.println("¿Es pediatra? (y/n)");
 				auxScan=keyboard.nextLine();
 				int aux2=(auxScan.equals("y"))?1:0;
-				System.out.println("");
 
-				Empleado oEnfTemp= new Enfermero(nombre, ci, fechaNacimientoSinParseo, celular, direccion, email, fechaEntradaSinParseo, sueldoBase, aux0, aux1, aux2);
+				Empleado oEnfTemp= new Enfermero(nombre, ci, fechaNacimiento, celular, direccion, email, fechaEntrada, sueldoBase, aux0, aux1, aux2);
 
 				listaEmpleados.add(oEnfTemp);
 				//listaEnfermeros.add(oEnfTemp);
@@ -192,8 +192,9 @@ public class Principal{
 
 	public static void listarFC(/*String /*tempFechaSinParseo*/){
 		Scanner keyboard=new Scanner(System.in);
-		System.out.println("Ingrese fecha (dd/mm/aaaa)  //en año, ingrese cualquiera//");
-		String tempFechaSinParseo= keyboard.nextLine();
+		System.out.println("Ingrese fecha (dd/mm)");
+		String temp7= keyboard.nextLine();
+		String tempFechaSinParseo= temp7+"/2010";
 
 		DateTimeFormatter formatoUruguayo= DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
@@ -263,5 +264,27 @@ public class Principal{
 		BigDecimal totalTotalEh= totalOperativos.add(totalEnfermeros.add(totalMedicos));
 		System.out.println("Total de presupuesto: "+totalTotalEh);
 		System.out.println("¿Qué quiere hacer ahora?");
+	}
+
+
+	public static LocalDate pedirFecha(){
+
+	boolean isFechaIncorrecta=false;
+	Scanner kb=new Scanner(System.in);
+ 	String tempFechaSinParseo;
+	LocalDate tempFecha=LocalDate.of(0,1,1);
+	do{
+		try{
+	    tempFechaSinParseo=kb.nextLine();
+			isFechaIncorrecta=false;
+			DateTimeFormatter formatoUruguayo= DateTimeFormatter.ofPattern("dd/MM/yyyy");
+	    tempFecha=  LocalDate.parse(tempFechaSinParseo,formatoUruguayo);
+	  }
+	  catch(DateTimeParseException e){
+	    isFechaIncorrecta=true;
+	    System.out.println("Fecha no válida. POr favor reingresela.");
+	  }
+	  }while(isFechaIncorrecta);
+		return tempFecha;
 	}
 }

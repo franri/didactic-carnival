@@ -3,19 +3,29 @@ package uy.edu.um.fium.prog1.oblig.entidades;
 import java.time.LocalDate;
 import java.math.BigDecimal;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 
 public class Enfermero extends Operativo{
 
-    private String[] especialidades=new String[3];
 
-		public Enfermero(String nombre, String ci, String fechaNacimientoSinParseo, String celular, String direccion,String email,String fechaEntradaSinParseo,String sueldoBase, int aux0, int aux1, int aux2){
+    private ArrayList<String> especialidades=new ArrayList<String>();
 
-			super(nombre, ci, fechaNacimientoSinParseo, celular, direccion, email, fechaEntradaSinParseo, sueldoBase);
+		public Enfermero(String nombre, String ci, LocalDate fechaNacimiento, String celular, String direccion,String email,LocalDate fechaEntrada,String sueldoBase, int aux0, int aux1, int aux2){
+
+			super(nombre, ci, fechaNacimiento, celular, direccion, email, fechaEntrada, sueldoBase);
 
 
-			especialidades[0]=(aux0==1)?"Obstetra":null;
-			especialidades[1]=(aux1==1)?"Geriatra":null;
-			especialidades[2]=(aux2==1)?"Pediatra":null;
+      if(aux0==1){
+        especialidades.add("Obstetra");
+      }
+
+      if(aux1==1){
+        especialidades.add("Geriatra");
+      }
+
+      if(aux2==1){
+        especialidades.add("Pediatra");
+      }
 
 		}
 

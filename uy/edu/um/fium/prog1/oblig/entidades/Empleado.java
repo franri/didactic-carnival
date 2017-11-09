@@ -11,16 +11,14 @@ public abstract class Empleado{
   protected String nombre;
   protected String ci;
   protected LocalDate fechaNacimiento;
-	protected String fechaNacimientoSinParseo;
 	protected String celular;
 	protected String direccion;
 	protected String email;
   protected LocalDate fechaEntrada;
-	protected String fechaEntradaSinParseo;
   protected BigDecimal sueldoBase;
 
 
-	public Empleado(String nombre, String ci, String fechaNacimientoSinParseo, String celular, String direccion,String email,String fechaEntradaSinParseo,String sueldoBase){
+	public Empleado(String nombre, String ci, LocalDate fechaNacimiento, String celular, String direccion,String email,LocalDate fechaEntrada,String sueldoBase){
 
 		this.nombre=nombre;
 		this.ci=ci;
@@ -30,10 +28,9 @@ public abstract class Empleado{
 		this.sueldoBase= new BigDecimal(sueldoBase);
 		this.sueldoBase=this.sueldoBase.setScale(2, RoundingMode.HALF_UP); //Big.Decimal.setScale  RoundingMode
 
-		DateTimeFormatter formatoUruguayo= DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
-		fechaNacimiento=LocalDate.parse(fechaNacimientoSinParseo,formatoUruguayo);
-		fechaEntrada=LocalDate.parse(fechaEntradaSinParseo,formatoUruguayo);
+		this.fechaNacimiento=fechaNacimiento;
+		this.fechaEntrada=fechaEntrada;
 	}
 
 	public double calcularPorcentajeAdicional(LocalDate ahora){
@@ -75,9 +72,6 @@ public abstract class Empleado{
 	}
 	public LocalDate getFechaNacimiento(){
 		return fechaNacimiento;
-	}
-	public String getFechaNacimientoSinParseo(){
-		return fechaNacimientoSinParseo;
 	}
 	public BigDecimal getSueldoBase(){
 		return sueldoBase;
