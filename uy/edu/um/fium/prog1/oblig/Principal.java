@@ -109,14 +109,43 @@ public class Principal{
 		String celular=keyboard.nextLine();
 		System.out.println("Ingrese direccion:");
 		String direccion=keyboard.nextLine();
-		System.out.println("Ingrese email:");
-		String email=keyboard.nextLine();
+
+		boolean hasArroba=false;
+		String email;
+		do{
+			System.out.println("Ingrese email:");
+			email=keyboard.nextLine();
+			for(int i=0; i<email.length(); i++){
+				if(email.charAt(i)=='@'){
+					hasArroba=true;
+				}
+			}
+			if(!hasArroba){
+				System.out.println("No se detectó una @. Reingréselo nuevamente.");
+			}
+		}while(!hasArroba);
+
 		System.out.println("Ingrese fecha de entrada (dd/mm/aaaa):");
 		LocalDate fechaEntrada=pedirFecha();
-		System.out.println("Ingrese sueldo base:");
-		String sueldoBase=keyboard.nextLine();
-		//System.out.println("");//porque si no pongo esta impresion se me queda en enter infinito
-		//keyboard.close();
+
+		System.out.println("Ingrese sueldo base:   (sólo monto numérico, con comas como separador decimal)");
+		String tempSueldoBaseConComa=null;
+		String sueldoBase=null;
+		boolean esSueldo=false;
+		do{
+				tempSueldoBaseConComa=keyboard.nextLine();
+				sueldoBase=tempSueldoBaseConComa.replace(",",".");
+				esSueldo=true;
+			try
+		  {
+		    double chequeoSueldo = Double.parseDouble(sueldoBase);
+		  }
+		  catch(NumberFormatException e)
+		  {
+		    System.out.println("No es un formato de sueldo válido, reingrese nuevamente.");
+				esSueldo=false;
+		  }
+	}while(!esSueldo);
 
 		switch(modo){
 			case 0:
