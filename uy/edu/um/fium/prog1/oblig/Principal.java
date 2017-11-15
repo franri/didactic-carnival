@@ -53,7 +53,7 @@ public class Principal{
 				break;
 				case "2":
 					System.out.println("Ingrese cédula");
-					String tempCi= keyboard.next();
+					String tempCi= keyboard.nextLine();
 					buscarOperativo(tempCi);
 				break;
 				case "3":
@@ -354,7 +354,7 @@ public class Principal{
 		System.out.println("Total de presupuesto de los operativos: "+totalOperativos.setScale(2, RoundingMode.HALF_UP));
 		totalTotalEh= totalOperativos.add(totalEnfermeros.add(totalMedicos));
 		System.out.println("Total de presupuesto: "+totalTotalEh.setScale(2, RoundingMode.HALF_UP));
-		
+
 		System.out.println("¿Qué quiere hacer ahora?\n1.\tRegistrar nuevo empleado.\n2.\tBuscar operativo por cédula.\n3.\tEnviar saludo a operativos que cumplan años el día deseado.\n4.\tObtener presupuesto del hospital.\n5.\tSalir.");
 
 	}
