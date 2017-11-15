@@ -5,7 +5,7 @@ import java.math.BigDecimal;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
-public class Enfermero extends Operativo{
+public class Enfermero extends Empleado{
 
 
     private ArrayList<String> especialidades=new ArrayList<String>();

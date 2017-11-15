@@ -330,39 +330,33 @@ public class Principal{
 
 	public static void obtenerPresupuesto(LocalDate ahora){
 
-		//Proceso primero Médicos
+
 		BigDecimal totalMedicos= new BigDecimal(0);
+		BigDecimal totalEnfermeros= new BigDecimal(0);
+		BigDecimal totalOperativos= new BigDecimal(0);
+		BigDecimal totalTotalEh= new BigDecimal(0);
+
 		for(int i=0; i<listaEmpleados.size(); i++){
 			Empleado temp=listaEmpleados.get(i);
 			if(temp instanceof Medico){
 				totalMedicos=totalMedicos.add(temp.getSueldoActual(ahora));
 			}
+			if(temp instanceof Enfermero){
+				totalEnfermeros=totalEnfermeros.add(temp.getSueldoActual(ahora));
+			}
+			if(temp instanceof Operativo){
+				totalOperativos=totalOperativos.add(temp.getSueldoActual(ahora));
+			}
 		}
+
 		System.out.println("Total de presupuesto de los médicos: "+totalMedicos.setScale(2, RoundingMode.HALF_UP));
-
-		//ahora enfermeros
-		BigDecimal totalEnfermeros= new BigDecimal(0);
-		for(int i=0; i<listaEmpleados.size(); i++){
-			Empleado temp2=listaEmpleados.get(i);
-			if(temp2 instanceof Enfermero){
-				totalEnfermeros=totalEnfermeros.add(temp2.getSueldoActual(ahora));
-			}
-		}
 		System.out.println("Total de presupuesto de los enfermeros: "+totalEnfermeros.setScale(2, RoundingMode.HALF_UP));
-
-		//ahora operativos
-		BigDecimal totalOperativos= new BigDecimal(0);
-		for(int i=0; i<listaEmpleados.size(); i++){
-			Empleado temp3=listaEmpleados.get(i);
-			if(temp3 instanceof Operativo){
-				totalOperativos=totalOperativos.add(temp3.getSueldoActual(ahora));
-			}
-		}
 		System.out.println("Total de presupuesto de los operativos: "+totalOperativos.setScale(2, RoundingMode.HALF_UP));
-
-		BigDecimal totalTotalEh= totalOperativos.add(totalEnfermeros.add(totalMedicos));
+		totalTotalEh= totalOperativos.add(totalEnfermeros.add(totalMedicos));
 		System.out.println("Total de presupuesto: "+totalTotalEh.setScale(2, RoundingMode.HALF_UP));
-		System.out.println("¿Qué quiere hacer ahora?\n1.\tRegistrar nuevo empleado.\n2.\tBuscar operativo por cédula.\n3.\tEnviar saludo a operativos que cumplan años el día deseado.\n4.\tObtener presupuesto del hospital.");
+		
+		System.out.println("¿Qué quiere hacer ahora?\n1.\tRegistrar nuevo empleado.\n2.\tBuscar operativo por cédula.\n3.\tEnviar saludo a operativos que cumplan años el día deseado.\n4.\tObtener presupuesto del hospital.\n5.\tSalir.");
+
 	}
 
 

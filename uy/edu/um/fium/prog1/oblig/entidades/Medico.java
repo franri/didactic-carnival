@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.math.BigDecimal;
 import java.time.format.DateTimeFormatter;
 
-public class Medico extends Operativo{
+public class Medico extends Empleado{
 
   private String especialidad;
   private LocalDate fechaGraduado;
