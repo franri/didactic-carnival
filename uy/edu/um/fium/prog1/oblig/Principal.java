@@ -15,12 +15,6 @@ public class Principal{
 
 	public static LocalDate diaActual;
 
-	/*
-	ArrayList<Operativo> static listaOperativos= new ArrayList<Operativo>();
-	ArrayList<Medico> static listaMedicos= new ArrayList<Medico>();
-	ArrayList<Enfermero> static listaEnfermeros= new ArrayList<Enfermero>();
-	*/
-
   public static void main(String[] args){
 
 		diaActual=LocalDate.now();
@@ -31,18 +25,10 @@ public class Principal{
 
 		Scanner keyboard= new Scanner(System.in);
 
-	  System.out.println("BASE DE DATOS DE EMPLEADOS CASMU\n\nFecha:"+diaActualSinParseo+"\n\nActividades que puede realizar:\n\n1.\tRegistrar nuevo empleado.\n2.\tBuscar operativo por cédula.\n3.\tEnviar saludo a operativos que cumplan años el día deseado.\n4.\tObtener presupuesto del hospital.");
+	  System.out.println("BASE DE DATOS DE EMPLEADOS CASMU\n\nFecha:"+diaActualSinParseo+"\n\nActividades que puede realizar:\n\n1.\tRegistrar nuevo empleado.\n2.\tBuscar operativo por cédula.\n3.\tEnviar saludo a operativos que cumplan años el día deseado.\n4.\tObtener presupuesto del hospital.\n5.\tSalir.");
 
-
-		while(true){
-
-		/*
-			boolean lala=false;
-			if(lala){
-				System.out.println("¿Qué quiere hacer ahora?");
-			}
-			lala=true;
-		*/ //porque no funca esto? la idea era que fuera para imprimir que queres hacer para saber que termino de hacer la actividad anterior
+		boolean quedarse=true;
+		while(quedarse){
 			String entrada=	keyboard.nextLine();
 
 			switch(entrada){
@@ -55,12 +41,13 @@ public class Principal{
 					buscarOperativo(tempCi);
 				break;
 				case "3":
-					/*System.out.println("Ingrese fecha (dd/mm/aaaa)  //en año, ingrese cualquiera//");
-					String tempFechaSinParseo= keyboard.nextLine();*/
-					listarFC(/*tempFechaSinParseo*/);
+					listarFC();
 				break;
 				case "4":
 					obtenerPresupuesto(diaActual);
+				break;
+				case "5":
+				quedarse=false;
 				break;
 				default:
 					System.out.println("Su opción no es válida. Por favor reintente.");
@@ -71,7 +58,7 @@ public class Principal{
 
 	public static void comenzarAgrego(){
 
-		System.out.println("Para agregar un médico, ingrese 1.\nPara agregar un enfermero, ingrese 2.\nDe lo contrario, ingrese 0.");
+		System.out.println("Para agregar un operativo, ingrese 0.\nPara agregar un médico, ingrese 1.\nPara agregar un enfermero, ingrese 2.\n");
 
 		Scanner keyboard= new Scanner(System.in);
 		boolean sePudoHacerLaCosa=false;
@@ -82,17 +69,17 @@ public class Principal{
 				case "0":
 					agregarEmpleado(0);
 					sePudoHacerLaCosa=true;
-					System.out.println("¿Qué quiere hacer ahora?");
+					System.out.println("¿Qué quiere hacer ahora?\n1.\tRegistrar nuevo empleado.\n2.\tBuscar operativo por cédula.\n3.\tEnviar saludo a operativos que cumplan años el día deseado.\n4.\tObtener presupuesto del hospital.\n5.\tSalir.");
 				break;
 				case "1":
 					agregarEmpleado(1);
 					sePudoHacerLaCosa=true;
-					System.out.println("¿Qué quiere hacer ahora?");
+					System.out.println("¿Qué quiere hacer ahora?\n1.\tRegistrar nuevo empleado.\n2.\tBuscar operativo por cédula.\n3.\tEnviar saludo a operativos que cumplan años el día deseado.\n4.\tObtener presupuesto del hospital.\n5.\tSalir.");
 				break;
 				case "2":
 					agregarEmpleado(2);
 					sePudoHacerLaCosa=true;
-					System.out.println("¿Qué quiere hacer ahora?");
+					System.out.println("¿Qué quiere hacer ahora?\n1.\tRegistrar nuevo empleado.\n2.\tBuscar operativo por cédula.\n3.\tEnviar saludo a operativos que cumplan años el día deseado.\n4.\tObtener presupuesto del hospital.\n5.\tSalir.");
 				break;
 				default:
 					System.out.println("Su opción no es válida. Por favor reintente.");
@@ -137,31 +124,48 @@ public class Principal{
 		System.out.println("Ingrese fecha de entrada (dd/mm/aaaa):");
 		LocalDate fechaEntrada=pedirFecha();
 
-		System.out.println("Ingrese sueldo base:   (sólo monto numérico, con comas como separador decimal)");
-		String tempSueldoBaseConComa=null;
+		System.out.println("Ingrese sueldo base:   (sólo monto numérico, con puntos como separador decimal)");
+		String tempSueldoBase=null;
 		String sueldoBase=null;
 		boolean esSueldo=false;
 		do{
-				tempSueldoBaseConComa=keyboard.nextLine();
-				sueldoBase=tempSueldoBaseConComa.replace(",",".");
+				tempSueldoBase=keyboard.nextLine();
+				sueldoBase=tempSueldoBase;
 				esSueldo=true;
 			try
 		  {
-		    double chequeoSueldo = Double.parseDouble(sueldoBase);
+		    double chequeoSueldo = Double.parseDouble(tempSueldoBase);
 		  }
 		  catch(NumberFormatException e)
 		  {
 		    System.out.println("No es un formato de sueldo válido, reingrese nuevamente.");
 				esSueldo=false;
 		  }
-	}while(!esSueldo);
+		}while(!esSueldo);
 
 		switch(modo){
 			case 0:
-				Empleado oOpTemp= new Operativo(nombre, ci, fechaNacimiento, celular, direccion, email, fechaEntrada, sueldoBase);
-
-				listaEmpleados.add(oOpTemp);
-				//listaOperativos.add(oOpTemp);
+			System.out.println("¿Confirma agregar empleado con datos introducidos? (y/n)");
+			String decision=null;
+			boolean opcionValida=false;
+			do{
+				decision=keyboard.nextLine();
+				if(decision.equals("y")){
+					Empleado oOpTemp= new Operativo(nombre, ci, fechaNacimiento, celular, direccion, email, fechaEntrada, sueldoBase);
+					listaEmpleados.add(oOpTemp);
+					opcionValida=true;
+				}
+				else{
+					if(decision.equals("n")){
+						System.out.println("Empleado no agregado");
+						opcionValida=true;
+					}
+					else{
+						System.out.println("Su ingreso no es correcto. Reintente.");
+						opcionValida=false;
+					}
+				}
+			}while(!opcionValida);
 			break;
 
 			case 1:
@@ -181,10 +185,29 @@ public class Principal{
 				LocalDate fechaGraduado=pedirFecha();
 
 
-				Empleado oMedTemp= new Medico(nombre, ci, fechaNacimiento, celular, direccion, email, fechaEntrada, sueldoBase, especialidad, fechaGraduado);
+				System.out.println("¿Confirma agregar empleado con datos introducidos? (y/n)");
+				String decision1=null;
+				boolean opcionValida1=false;
+				do{
+					decision=keyboard.nextLine();
+					if(decision1.equals("y")){
+						Empleado oMedTemp= new Medico(nombre, ci, fechaNacimiento, celular, direccion, email, fechaEntrada, sueldoBase, especialidad, fechaGraduado);
+						listaEmpleados.add(oMedTemp);
+						opcionValida1=true;
+					}
+					else{
+						if(decision1.equals("n")){
+							System.out.println("Empleado no agregado");
+							opcionValida1=true;
+						}
+						else{
+							System.out.println("Su ingreso no es correcto. Reintente.");
+							opcionValida1=false;
+						}
+					}
+				}while(!opcionValida1);
 
-				listaEmpleados.add(oMedTemp);
-				//listaMedicos.add(oMedTemp);
+
 			break;
 
 			case 2:
@@ -198,10 +221,28 @@ public class Principal{
 				auxScan=keyboard.nextLine();
 				int aux2=(auxScan.equals("y"))?1:0;
 
-				Empleado oEnfTemp= new Enfermero(nombre, ci, fechaNacimiento, celular, direccion, email, fechaEntrada, sueldoBase, aux0, aux1, aux2);
 
-				listaEmpleados.add(oEnfTemp);
-				//listaEnfermeros.add(oEnfTemp);
+				System.out.println("¿Confirma agregar empleado con datos introducidos? (y/n)");
+				String decision2=null;
+				boolean opcionValida2=false;
+				do{
+					decision=keyboard.nextLine();
+					if(decision2.equals("y")){
+						Empleado oEnfTemp= new Enfermero(nombre, ci, fechaNacimiento, celular, direccion, email, fechaEntrada, sueldoBase, aux0, aux1, aux2);
+						listaEmpleados.add(oEnfTemp);
+						opcionValida2=true;
+					}
+					else{
+						if(decision2.equals("n")){
+							System.out.println("Empleado no agregado");
+							opcionValida2=true;
+						}
+						else{
+							System.out.println("Su ingreso no es correcto. Reintente.");
+							opcionValida2=false;
+						}
+					}
+				}while(!opcionValida2);
 			break;
 
 
@@ -224,11 +265,11 @@ public class Principal{
 				System.out.println("No hay ningún empleado con ese número de cédula.");
 			}
 		}
-		System.out.println("¿Qué quiere hacer ahora?");
+		System.out.println("¿Qué quiere hacer ahora?\n1.\tRegistrar nuevo empleado.\n2.\tBuscar operativo por cédula.\n3.\tEnviar saludo a operativos que cumplan años el día deseado.\n4.\tObtener presupuesto del hospital.\n5.\tSalir.");
 
 	}
 
-	public static void listarFC(/*String /*tempFechaSinParseo*/){
+	public static void listarFC(){
 		Scanner keyboard=new Scanner(System.in);
 		System.out.println("Ingrese fecha (dd/mm)");
 		String temp7= keyboard.nextLine();
@@ -239,6 +280,7 @@ public class Principal{
 		LocalDate tempFecha=LocalDate.parse(tempFechaSinParseo,formatoUruguayo);
 
 		int tempDia=tempFecha.getDayOfMonth();
+
 		int tempMes=tempFecha.getMonthValue();
 
 		ArrayList<Empleado> tempArrayDeFC = new ArrayList<Empleado>();
@@ -265,7 +307,7 @@ public class Principal{
 			}
 		}
 
-		System.out.println("¿Qué quiere hacer ahora?");
+		System.out.println("¿Qué quiere hacer ahora?\n1.\tRegistrar nuevo empleado.\n2.\tBuscar operativo por cédula.\n3.\tEnviar saludo a operativos que cumplan años el día deseado.\n4.\tObtener presupuesto del hospital.\n5.\tSalir.");
 	}
 
 	public static void obtenerPresupuesto(LocalDate ahora){
@@ -301,7 +343,7 @@ public class Principal{
 		System.out.println("Total de presupuesto de los operativos: "+totalOperativos);
 		BigDecimal totalTotalEh= totalOperativos.add(totalEnfermeros.add(totalMedicos));
 		System.out.println("Total de presupuesto: "+totalTotalEh);
-		System.out.println("¿Qué quiere hacer ahora?");
+		System.out.println("¿Qué quiere hacer ahora?\n1.\tRegistrar nuevo empleado.\n2.\tBuscar operativo por cédula.\n3.\tEnviar saludo a operativos que cumplan años el día deseado.\n4.\tObtener presupuesto del hospital.");
 	}
 
 
