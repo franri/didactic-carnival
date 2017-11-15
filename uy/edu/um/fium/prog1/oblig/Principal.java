@@ -115,7 +115,7 @@ public class Principal{
 		String nombre=keyboard.nextLine();
 		System.out.println("Ingrese cédula sin guión:");
 		String ci=keyboard.nextLine();
-		System.out.println("Ingrese fecha de nacimiento (dd/mm/aaaa):");
+		System.out.println("Ingrese fecha de nacimiento (dd/mm/aaaa con año obligatorio de 4 dígitos):");
 		LocalDate fechaNacimiento=pedirFecha();
 		System.out.println("Ingrese celular:");
 		String celular=keyboard.nextLine();
@@ -137,7 +137,7 @@ public class Principal{
 			}
 		}while(!hasArroba);
 
-		System.out.println("Ingrese fecha de entrada (dd/mm/aaaa):");
+		System.out.println("Ingrese fecha de entrada (dd/mm/aaaa con año obligatorio de 4 dígitos):");
 		LocalDate fechaEntrada=pedirFecha();
 
 		System.out.println("Ingrese sueldo base:   (sólo monto numérico, con puntos como separador decimal)");
@@ -227,13 +227,13 @@ public class Principal{
 			break;
 
 			case 2:
-				System.out.println("¿Es obstetra? (y/n)");
+				System.out.println("¿Es obstetra? (y para sí, cualquier otra cosa para no)");
 				String auxScan=keyboard.nextLine();
 				int aux0=(auxScan.equals("y"))?1:0;
-				System.out.println("¿Es geriatra? (y/n)");
+				System.out.println("¿Es geriatra? (y para sí, cualquier otra cosa para no)");
 				auxScan=keyboard.nextLine();
 				int aux1=(auxScan.equals("y"))?1:0;
-				System.out.println("¿Es pediatra? (y/n)");
+				System.out.println("¿Es pediatra? (y para sí, cualquier otra cosa para no)");
 				auxScan=keyboard.nextLine();
 				int aux2=(auxScan.equals("y"))?1:0;
 
@@ -370,12 +370,12 @@ public class Principal{
 			try{
 		    tempFechaSinParseo=kb.nextLine();
 				isFechaIncorrecta=false;
-				DateTimeFormatter formatoUruguayo= DateTimeFormatter.ofPattern("dd/MM/yyyy");
+				DateTimeFormatter formatoUruguayo= DateTimeFormatter.ofPattern("d/M/yyyy");
 		    tempFecha=  LocalDate.parse(tempFechaSinParseo,formatoUruguayo);
 		  }
 		  catch(DateTimeParseException e){
 		    isFechaIncorrecta=true;
-		    System.out.println("Fecha no válida. POr favor reingresela.");
+		    System.out.println("Fecha no válida. Por favor reingresela.");
 		  }
 		  }while(isFechaIncorrecta);
 			return tempFecha;
