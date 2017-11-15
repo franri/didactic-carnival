@@ -33,23 +33,26 @@ public abstract class Empleado{
 		this.fechaEntrada=fechaEntrada;
 	}
 
-	public double calcularPorcentajeAdicional(LocalDate ahora){
+	public int antiguedad(LocalDate ahora){
 
 		Period tiempoEnCasmu=Period.between(fechaEntrada, ahora);
 
 		int aniosTotales=tiempoEnCasmu.getYears();
 
-		int cardinalIncrementosDeSueldo= aniosTotales/2; //xej, si tengo 7 años, tengo 3 incrementos, no joroba el truncado de la división. AVANTI
+		int antiguedadDeSueldo= aniosTotales/2; //xej, si tengo 7 años, tengo 3 incrementos, no joroba el truncado de la división. AVANTI
 
-		return cardinalIncrementosDeSueldo*1.5;
+		return antiguedadDeSueldo;
 
 	}
 
 	public BigDecimal getSueldoActual(LocalDate ahora){
-		double incrementoActual=calcularPorcentajeAdicional(ahora);
-		double porcentajeActual=100+incrementoActual;
-		BigDecimal aux=BigDecimal.valueOf(porcentajeActual/100);
-		BigDecimal sueldoActual=sueldoBase.multiply(aux);
+
+    BigDecimal sueldoActual=sueldoBase.add(BigDecimal.ZERO);
+
+    for(int i=antiguedad(ahora); i>0; i--){
+		BigDecimal unPorcentaje= new BigDecimal("1.015");
+		sueldoActual=sueldoActual.multiply(unPorcentaje);
+    }
 		return sueldoActual;
 	}
 

@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 import java.time.format.DateTimeParseException;
+import java.math.RoundingMode;
 
 import uy.edu.um.fium.prog1.oblig.entidades.*;
 
@@ -24,6 +25,21 @@ public class Principal{
 		String diaActualSinParseo=diaActual.format(formatoUruguayo);
 
 		Scanner keyboard= new Scanner(System.in);
+
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
+		Empleado ale=new Medico("ALEJANDRO MARTÍNEZ", "11111111", LocalDate.parse("1950-11-15", formatter), "555555555", "Calle 1 Solar 2", "alejandro@tuhospital", LocalDate.parse("2007-11-11", formatter), "150000", "Clínica", LocalDate.parse("1975-12-10", formatter));
+		Empleado sonic=new Medico("SONIA ZORRILLA", "22222222", LocalDate.parse("1980-11-16", formatter), "444444444", "Calle 3 Solar 4", "sonia@tuhospital", LocalDate.parse("2012-05-05", formatter), "120000", "Cirugía", LocalDate.parse("1975-02-10", formatter));
+		Empleado marto=new Enfermero("MARTÍN TRONCOSO", "33333333", LocalDate.parse("1984-11-17", formatter), "666666666", "Calle 4 Solar 5", "martin@tuhospital", LocalDate.parse("2007-11-15", formatter), "65000", 0, 0, 0);
+		Empleado susi=new Enfermero("SUSANA HUGUET", "444444444", LocalDate.parse("1979-11-17", formatter), "777777777", "Calle 5 Solar 3", "susana@tuhospital", LocalDate.parse("2012-03-04", formatter), "75000", 1, 1, 1);
+		Empleado ines=new Operativo("INES MONTANER", "55555555", LocalDate.parse("1974-11-15", formatter), "888888888", "Calle 6 Solar 4", "ines@tuhospital",LocalDate.parse("2007-11-17", formatter), "50000");
+
+
+		listaEmpleados.add(ale);
+		listaEmpleados.add(sonic);
+		listaEmpleados.add(marto);
+		listaEmpleados.add(susi);
+		listaEmpleados.add(ines);
 
 	  System.out.println("BASE DE DATOS DE EMPLEADOS CASMU\n\nFecha:"+diaActualSinParseo+"\n\nActividades que puede realizar:\n\n1.\tRegistrar nuevo empleado.\n2.\tBuscar operativo por cédula.\n3.\tEnviar saludo a operativos que cumplan años el día deseado.\n4.\tObtener presupuesto del hospital.\n5.\tSalir.");
 
@@ -174,7 +190,7 @@ public class Principal{
 			do{
 				System.out.println("Ingrese especialidad:");
 				especialidad=keyboard.nextLine();
-				if(especialidad.equals("Pediatria")||especialidad.equals("Cardiologia")||especialidad.equals("Ginecologia")||especialidad.equals("Clinica")||especialidad.equals("Cirugia")||especialidad.equals("Anestesiologia")||especialidad.equals("Gastroenterologia")||especialidad.equals("Neurologia")){
+				if(especialidad.equals("Pediatría")||especialidad.equals("Cardiología")||especialidad.equals("Ginecología")||especialidad.equals("Clínica")||especialidad.equals("Cirugía")||especialidad.equals("Anestesiología")||especialidad.equals("Gastroenterología")||especialidad.equals("Neurología")){
 					aux=true;
 				}
 				else{
@@ -189,7 +205,7 @@ public class Principal{
 				String decision1=null;
 				boolean opcionValida1=false;
 				do{
-					decision=keyboard.nextLine();
+					decision1=keyboard.nextLine();
 					if(decision1.equals("y")){
 						Empleado oMedTemp= new Medico(nombre, ci, fechaNacimiento, celular, direccion, email, fechaEntrada, sueldoBase, especialidad, fechaGraduado);
 						listaEmpleados.add(oMedTemp);
@@ -226,7 +242,7 @@ public class Principal{
 				String decision2=null;
 				boolean opcionValida2=false;
 				do{
-					decision=keyboard.nextLine();
+					decision2=keyboard.nextLine();
 					if(decision2.equals("y")){
 						Empleado oEnfTemp= new Enfermero(nombre, ci, fechaNacimiento, celular, direccion, email, fechaEntrada, sueldoBase, aux0, aux1, aux2);
 						listaEmpleados.add(oEnfTemp);
@@ -261,18 +277,19 @@ public class Principal{
 				Empleado temp=listaEmpleados.get(i);
 				System.out.println("\nDatos del empleado "+temp.getNombre()+":\n"+"Celular:\t"+temp.getCelular()+"\nDirección:\t"+temp.getDireccion()+"\nEmail:\t"+temp.getEmail());
 			}
-			if(!hayConMismaCedula){
-				System.out.println("No hay ningún empleado con ese número de cédula.");
-			}
+		}
+
+		if(!hayConMismaCedula){
+			System.out.println("No hay ningún empleado con ese número de cédula.");
 		}
 		System.out.println("¿Qué quiere hacer ahora?\n1.\tRegistrar nuevo empleado.\n2.\tBuscar operativo por cédula.\n3.\tEnviar saludo a operativos que cumplan años el día deseado.\n4.\tObtener presupuesto del hospital.\n5.\tSalir.");
 
 	}
 
 	public static void listarFC(){
-		Scanner keyboard=new Scanner(System.in);
+		Scanner keyboard7=new Scanner(System.in);
 		System.out.println("Ingrese fecha (dd/mm)");
-		String temp7= keyboard.nextLine();
+		String temp7= keyboard7.nextLine();
 		String tempFechaSinParseo= temp7+"/2010";
 
 		DateTimeFormatter formatoUruguayo= DateTimeFormatter.ofPattern("dd/MM/yyyy");
@@ -290,20 +307,21 @@ public class Principal{
 			Empleado tempEmpleado=listaEmpleados.get(i);
 			LocalDate tempEmpFechaNac=tempEmpleado.getFechaNacimiento();
 			int tempEmpDia=tempEmpFechaNac.getDayOfMonth();
-			int tempOpMes=tempEmpFechaNac.getMonthValue();
+			int tempEmpMes=tempEmpFechaNac.getMonthValue();
 
-			if(tempDia==tempEmpDia && tempMes==tempEmpDia){
+
+			if(tempDia==tempEmpDia && tempMes==tempEmpMes){
 				tempArrayDeFC.add(tempEmpleado);
 			}
 		}
 
 		if(tempArrayDeFC.size()==0){
-			System.out.println("Ningún empleado cumple años el día"+tempFechaSinParseo);
+			System.out.println("Ningún empleado cumple años el día "+temp7);
 		}
 		else{
 			System.out.println("Lista de empleados que cumplen años el día "+tempFechaSinParseo+":\n");
 			for(int i=0; i<tempArrayDeFC.size(); i++){
-				System.out.println(i+".\t"+tempArrayDeFC.get(i).getNombre()+".");
+				System.out.println(i+1+".\t"+tempArrayDeFC.get(i).getNombre()+".");
 			}
 		}
 
@@ -320,7 +338,7 @@ public class Principal{
 				totalMedicos=totalMedicos.add(temp.getSueldoActual(ahora));
 			}
 		}
-		System.out.println("Total de presupuesto de los médicos: "+totalMedicos);
+		System.out.println("Total de presupuesto de los médicos: "+totalMedicos.setScale(2, RoundingMode.HALF_UP));
 
 		//ahora enfermeros
 		BigDecimal totalEnfermeros= new BigDecimal(0);
@@ -330,7 +348,7 @@ public class Principal{
 				totalEnfermeros=totalEnfermeros.add(temp2.getSueldoActual(ahora));
 			}
 		}
-		System.out.println("Total de presupuesto de los enfermeros: "+totalEnfermeros);
+		System.out.println("Total de presupuesto de los enfermeros: "+totalEnfermeros.setScale(2, RoundingMode.HALF_UP));
 
 		//ahora operativos
 		BigDecimal totalOperativos= new BigDecimal(0);
@@ -340,31 +358,32 @@ public class Principal{
 				totalOperativos=totalOperativos.add(temp3.getSueldoActual(ahora));
 			}
 		}
-		System.out.println("Total de presupuesto de los operativos: "+totalOperativos);
+		System.out.println("Total de presupuesto de los operativos: "+totalOperativos.setScale(2, RoundingMode.HALF_UP));
+
 		BigDecimal totalTotalEh= totalOperativos.add(totalEnfermeros.add(totalMedicos));
-		System.out.println("Total de presupuesto: "+totalTotalEh);
+		System.out.println("Total de presupuesto: "+totalTotalEh.setScale(2, RoundingMode.HALF_UP));
 		System.out.println("¿Qué quiere hacer ahora?\n1.\tRegistrar nuevo empleado.\n2.\tBuscar operativo por cédula.\n3.\tEnviar saludo a operativos que cumplan años el día deseado.\n4.\tObtener presupuesto del hospital.");
 	}
 
 
 	public static LocalDate pedirFecha(){
 
-	boolean isFechaIncorrecta=false;
-	Scanner kb=new Scanner(System.in);
- 	String tempFechaSinParseo;
-	LocalDate tempFecha=LocalDate.of(0,1,1);
-	do{
-		try{
-	    tempFechaSinParseo=kb.nextLine();
-			isFechaIncorrecta=false;
-			DateTimeFormatter formatoUruguayo= DateTimeFormatter.ofPattern("dd/MM/yyyy");
-	    tempFecha=  LocalDate.parse(tempFechaSinParseo,formatoUruguayo);
-	  }
-	  catch(DateTimeParseException e){
-	    isFechaIncorrecta=true;
-	    System.out.println("Fecha no válida. POr favor reingresela.");
-	  }
-	  }while(isFechaIncorrecta);
-		return tempFecha;
+		boolean isFechaIncorrecta=false;
+		Scanner kb=new Scanner(System.in);
+	 	String tempFechaSinParseo;
+		LocalDate tempFecha=LocalDate.of(0,1,1);
+		do{
+			try{
+		    tempFechaSinParseo=kb.nextLine();
+				isFechaIncorrecta=false;
+				DateTimeFormatter formatoUruguayo= DateTimeFormatter.ofPattern("dd/MM/yyyy");
+		    tempFecha=  LocalDate.parse(tempFechaSinParseo,formatoUruguayo);
+		  }
+		  catch(DateTimeParseException e){
+		    isFechaIncorrecta=true;
+		    System.out.println("Fecha no válida. POr favor reingresela.");
+		  }
+		  }while(isFechaIncorrecta);
+			return tempFecha;
 	}
 }
