@@ -5,6 +5,20 @@ El objetivo del siguiente Java es emular la base de datos de un hospital e imple
 
 Se guiará al usuario a través de un menú interactivo en una Terminal.
 
+Cómo ejecutar el principal:
+
+-Posicionarse dentro de Carpeta/
+
+-Ingresar:
+
+            javac uy/edu/um/fium/prog1/oblig/Principal.java 
+
+-Ingresar:
+
+            java uy.edu.um.fium.prog1.oblig.Principal
+
+El programa debería comezar.
+
 Restricciones a tener en cuenta:
 
 Cuando se ingrese una especialidad para un empleado del tipo Médico, dispone de las siguientes opciones, con acentos:
