@@ -26,7 +26,7 @@ public abstract class Empleado{
 		this.direccion=direccion;
 		this.email=email;
 		this.sueldoBase= new BigDecimal(sueldoBase);
-		this.sueldoBase=this.sueldoBase.setScale(2, RoundingMode.HALF_UP); //Big.Decimal.setScale  RoundingMode
+		this.sueldoBase=this.sueldoBase.setScale(2, RoundingMode.HALF_UP);
 
 
 		this.fechaNacimiento=fechaNacimiento;

@@ -28,18 +28,18 @@ public class Principal{
 
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
-		Empleado ale=new Medico("ALEJANDRO MARTÍNEZ", "11111111", LocalDate.parse("1950-11-15", formatter), "555555555", "Calle 1 Solar 2", "alejandro@tuhospital", LocalDate.parse("2007-11-11", formatter), "150000", "Clínica", LocalDate.parse("1975-12-10", formatter));
-		Empleado sonic=new Medico("SONIA ZORRILLA", "22222222", LocalDate.parse("1980-11-16", formatter), "444444444", "Calle 3 Solar 4", "sonia@tuhospital", LocalDate.parse("2012-05-05", formatter), "120000", "Cirugía", LocalDate.parse("1975-02-10", formatter));
-		Empleado marto=new Enfermero("MARTÍN TRONCOSO", "33333333", LocalDate.parse("1984-11-17", formatter), "666666666", "Calle 4 Solar 5", "martin@tuhospital", LocalDate.parse("2007-11-15", formatter), "65000", 0, 0, 0);
-		Empleado susi=new Enfermero("SUSANA HUGUET", "444444444", LocalDate.parse("1979-11-17", formatter), "777777777", "Calle 5 Solar 3", "susana@tuhospital", LocalDate.parse("2012-03-04", formatter), "75000", 1, 1, 1);
-		Empleado ines=new Operativo("INES MONTANER", "55555555", LocalDate.parse("1974-11-15", formatter), "888888888", "Calle 6 Solar 4", "ines@tuhospital",LocalDate.parse("2007-11-17", formatter), "50000");
+		//Empleado ale=new Medico("ALEJANDRO MARTÍNEZ", "11111111", LocalDate.parse("1950-11-15", formatter), "555555555", "Calle 1 Solar 2", "alejandro@tuhospital", LocalDate.parse("2007-11-11", formatter), "150000", "Clínica", LocalDate.parse("1975-12-10", formatter));
+		//Empleado sonic=new Medico("SONIA ZORRILLA", "22222222", LocalDate.parse("1980-11-16", formatter), "444444444", "Calle 3 Solar 4", "sonia@tuhospital", LocalDate.parse("2012-05-05", formatter), "120000", "Cirugía", LocalDate.parse("1975-02-10", formatter));
+		//Empleado marto=new Enfermero("MARTÍN TRONCOSO", "33333333", LocalDate.parse("1984-11-17", formatter), "666666666", "Calle 4 Solar 5", "martin@tuhospital", LocalDate.parse("2007-11-15", formatter), "65000", 0, 0, 0);
+		//Empleado susi=new Enfermero("SUSANA HUGUET", "444444444", LocalDate.parse("1979-11-17", formatter), "777777777", "Calle 5 Solar 3", "susana@tuhospital", LocalDate.parse("2012-03-04", formatter), "75000", 1, 1, 1);
+		//Empleado ines=new Operativo("INES MONTANER", "55555555", LocalDate.parse("1974-11-15", formatter), "888888888", "Calle 6 Solar 4", "ines@tuhospital",LocalDate.parse("2007-11-17", formatter), "50000");
 
 
-		listaEmpleados.add(ale);
-		listaEmpleados.add(sonic);
-		listaEmpleados.add(marto);
-		listaEmpleados.add(susi);
-		listaEmpleados.add(ines);
+		//listaEmpleados.add(ale);
+		//listaEmpleados.add(sonic);
+		//listaEmpleados.add(marto);
+		//listaEmpleados.add(susi);
+		//listaEmpleados.add(ines);
 
 	  System.out.println("BASE DE DATOS DE EMPLEADOS CASMU\n\nFecha:"+diaActualSinParseo+"\n\nActividades que puede realizar:\n\n1.\tRegistrar nuevo empleado.\n2.\tBuscar operativo por cédula.\n3.\tEnviar saludo a operativos que cumplan años el día deseado.\n4.\tObtener presupuesto del hospital.\n5.\tSalir.");
 
@@ -85,27 +85,25 @@ public class Principal{
 				case "0":
 					agregarEmpleado(0);
 					sePudoHacerLaCosa=true;
-					System.out.println("¿Qué quiere hacer ahora?\n1.\tRegistrar nuevo empleado.\n2.\tBuscar operativo por cédula.\n3.\tEnviar saludo a operativos que cumplan años el día deseado.\n4.\tObtener presupuesto del hospital.\n5.\tSalir.");
+					System.out.println("\n¿Qué quiere hacer ahora?\n1.\tRegistrar nuevo empleado.\n2.\tBuscar operativo por cédula.\n3.\tEnviar saludo a operativos que cumplan años el día deseado.\n4.\tObtener presupuesto del hospital.\n5.\tSalir.");
 				break;
 				case "1":
 					agregarEmpleado(1);
 					sePudoHacerLaCosa=true;
-					System.out.println("¿Qué quiere hacer ahora?\n1.\tRegistrar nuevo empleado.\n2.\tBuscar operativo por cédula.\n3.\tEnviar saludo a operativos que cumplan años el día deseado.\n4.\tObtener presupuesto del hospital.\n5.\tSalir.");
+					System.out.println("\n¿Qué quiere hacer ahora?\n1.\tRegistrar nuevo empleado.\n2.\tBuscar operativo por cédula.\n3.\tEnviar saludo a operativos que cumplan años el día deseado.\n4.\tObtener presupuesto del hospital.\n5.\tSalir.");
 				break;
 				case "2":
 					agregarEmpleado(2);
 					sePudoHacerLaCosa=true;
-					System.out.println("¿Qué quiere hacer ahora?\n1.\tRegistrar nuevo empleado.\n2.\tBuscar operativo por cédula.\n3.\tEnviar saludo a operativos que cumplan años el día deseado.\n4.\tObtener presupuesto del hospital.\n5.\tSalir.");
+					System.out.println("\n¿Qué quiere hacer ahora?\n1.\tRegistrar nuevo empleado.\n2.\tBuscar operativo por cédula.\n3.\tEnviar saludo a operativos que cumplan años el día deseado.\n4.\tObtener presupuesto del hospital.\n5.\tSalir.");
 				break;
 				default:
-					System.out.println("Su opción no es válida. Por favor reintente.");
+					System.out.println("\nSu opción no es válida. Por favor reintente.");
 					sePudoHacerLaCosa=false;
 				break;
 			}
 			}while(!sePudoHacerLaCosa);
 		}
-
-		//keyboard.close();
 
 	public static void agregarEmpleado(int modo){
 
@@ -170,10 +168,11 @@ public class Principal{
 					Empleado oOpTemp= new Operativo(nombre, ci, fechaNacimiento, celular, direccion, email, fechaEntrada, sueldoBase);
 					listaEmpleados.add(oOpTemp);
 					opcionValida=true;
+					System.out.println("Empleado agregado con éxito.");
 				}
 				else{
 					if(decision.equals("n")){
-						System.out.println("Empleado no agregado");
+						System.out.println("Empleado no agregado.");
 						opcionValida=true;
 					}
 					else{
@@ -282,7 +281,7 @@ public class Principal{
 		if(!hayConMismaCedula){
 			System.out.println("No hay ningún empleado con ese número de cédula.");
 		}
-		System.out.println("¿Qué quiere hacer ahora?\n1.\tRegistrar nuevo empleado.\n2.\tBuscar operativo por cédula.\n3.\tEnviar saludo a operativos que cumplan años el día deseado.\n4.\tObtener presupuesto del hospital.\n5.\tSalir.");
+		System.out.println("\n¿Qué quiere hacer ahora?\n1.\tRegistrar nuevo empleado.\n2.\tBuscar operativo por cédula.\n3.\tEnviar saludo a operativos que cumplan años el día deseado.\n4.\tObtener presupuesto del hospital.\n5.\tSalir.");
 
 	}
 
@@ -292,7 +291,7 @@ public class Principal{
 		String temp7= keyboard7.nextLine();
 		String tempFechaSinParseo= temp7+"/2010";
 
-		DateTimeFormatter formatoUruguayo= DateTimeFormatter.ofPattern("dd/MM/yyyy");
+		DateTimeFormatter formatoUruguayo= DateTimeFormatter.ofPattern("d/M/yyyy");
 
 		LocalDate tempFecha=LocalDate.parse(tempFechaSinParseo,formatoUruguayo);
 
@@ -319,13 +318,13 @@ public class Principal{
 			System.out.println("Ningún empleado cumple años el día "+temp7);
 		}
 		else{
-			System.out.println("Lista de empleados que cumplen años el día "+tempFechaSinParseo+":\n");
+			System.out.println("Lista de empleados que cumplen años el día "+temp7+":\n");
 			for(int i=0; i<tempArrayDeFC.size(); i++){
 				System.out.println(i+1+".\t"+tempArrayDeFC.get(i).getNombre()+".");
 			}
 		}
 
-		System.out.println("¿Qué quiere hacer ahora?\n1.\tRegistrar nuevo empleado.\n2.\tBuscar operativo por cédula.\n3.\tEnviar saludo a operativos que cumplan años el día deseado.\n4.\tObtener presupuesto del hospital.\n5.\tSalir.");
+		System.out.println("\n¿Qué quiere hacer ahora?\n1.\tRegistrar nuevo empleado.\n2.\tBuscar operativo por cédula.\n3.\tEnviar saludo a operativos que cumplan años el día deseado.\n4.\tObtener presupuesto del hospital.\n5.\tSalir.");
 	}
 
 	public static void obtenerPresupuesto(LocalDate ahora){
@@ -347,7 +346,7 @@ public class Principal{
 			if(temp instanceof Operativo){
 				totalOperativos=totalOperativos.add(temp.getSueldoActual(ahora));
 			}
-		}
+		}											//realizo operaciones con bastantes lugares después de la coma, luego redondeo a dos cifras significativas
 
 		System.out.println("Total de presupuesto de los médicos: "+totalMedicos.setScale(2, RoundingMode.HALF_UP));
 		System.out.println("Total de presupuesto de los enfermeros: "+totalEnfermeros.setScale(2, RoundingMode.HALF_UP));
@@ -355,7 +354,7 @@ public class Principal{
 		totalTotalEh= totalOperativos.add(totalEnfermeros.add(totalMedicos));
 		System.out.println("Total de presupuesto: "+totalTotalEh.setScale(2, RoundingMode.HALF_UP));
 
-		System.out.println("¿Qué quiere hacer ahora?\n1.\tRegistrar nuevo empleado.\n2.\tBuscar operativo por cédula.\n3.\tEnviar saludo a operativos que cumplan años el día deseado.\n4.\tObtener presupuesto del hospital.\n5.\tSalir.");
+		System.out.println("\n¿Qué quiere hacer ahora?\n1.\tRegistrar nuevo empleado.\n2.\tBuscar operativo por cédula.\n3.\tEnviar saludo a operativos que cumplan años el día deseado.\n4.\tObtener presupuesto del hospital.\n5.\tSalir.");
 
 	}
 
